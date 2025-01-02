@@ -14,12 +14,17 @@ LIBFT = $(LIBFT_PATH)/libft.a
 
 # -------main compiling commands------- #
 CC = cc
-FSAN = -fsanitize=address -g3
+#FSAN = -fsanitize=address -g3
 # -I is used when header file is not in the same directory
 INCS = -I$(INC_PATH) -I$(LIBFT_PATH) -I$(PRINTF_PATH)
 FLAGS = -Wall -Wextra -Werror $(FSAN) $(INCS)
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
-SRCS_FILES =	push_swap.c
+SRCS_FILES =	push_swap.c \
+				ft_convert_base.c \
+				pushswap_utils_sort.c \
+				pushswap_utils_radixsort.c \
+				pushswap_utils_search.c
+#main-test-mergesort.c push_swap.c
 OBJS = $(SRCS:%.c=%.o)
 
 # ---------lib making & remove--------- #
