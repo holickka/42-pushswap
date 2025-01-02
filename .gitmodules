@@ -1,0 +1,3 @@
+[submodule "libft3"]
+	path = libft3
+	url = https://github.com/holickka/42kl-libft.git
