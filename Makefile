@@ -23,6 +23,7 @@ SRCS_FILES =	push_swap.c \
 				ft_convert_base.c \
 				pushswap_utils_sort.c \
 				pushswap_utils_radixsort.c \
+				pushswap_utils_simplesort.c \
 				pushswap_utils_search.c
 #main-test-mergesort.c push_swap.c
 OBJS = $(SRCS:%.c=%.o)

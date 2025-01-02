@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 07:40:45 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/02 07:57:33 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/02 23:07:37 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,14 @@ int	initialize_data_container(t_vars *vars, int argc)
 	return (1);
 }
 
+void	free_all(t_vars *vars)
+{
+	if (!vars)
+		return ;
+	free(vars->num);
+	free(vars->sorted_num);
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
@@ -130,7 +138,7 @@ int	main(int argc, char **argv)
 	vars.bits = 0;
 	if (argc < 2)
 		return (0);
-	/*debug*/ printf("argc=%d\n", argc);
+	/*debug*/ printf("-----------\nargc=%d\n", argc);
 	/*checknum*/
 	if (!check_duplicates(argv, argc))
 		return (0);
@@ -160,25 +168,35 @@ int	main(int argc, char **argv)
 	printf("sorted=");
 	while (x < argc - 1)
 		/*debug*/ printf("%d ", vars.sorted_num[x++]);
+	printf("\n");
 	/*------------debug end------------*/
 
 	find_n_replace(vars.sorted_num, vars.num, argc);
 
 	/*------------debug------------*/
 	x = 0;
-	printf("\nnew_index=");
+	printf("new_index=");
 	while (x < argc - 1)
 		/*debug*/ printf("%d ", vars.num[x++]);
+	printf("\n");
 	/*----------debug end-----------*/
 
 	// /*debug*/ printf("bitwise=%d %d\n", (8 >> 2), (8 >> 2) & 1);
-	radix_sort(vars.num, (argc - 2));
+
+	if (argc - 1 > 10)
+		radix_sort(vars.num, (argc - 2));
+	else
+		simple_sort(vars.num, (argc - 2));
+
+	if_sorted(vars.num, argc - 2);
 
 	/*------------debug------------*/
 	x = 0;
 	printf("\nradix_sort=");
 	while (x < argc - 1)
 		/*debug*/ printf("%d ", vars.num[x++]);
+	printf("\n");
 	/*----------debug end-----------*/
 	/*remember to free initialized malloc pointers*/
+	free_all(&vars);
 }
