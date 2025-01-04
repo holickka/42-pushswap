@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 21:04:08 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/03 13:34:33 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/04 16:47:21 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*shift_array(int *dest, int *src, int len)
 }
 
 /* initializes all tmp_array values to -1 for debug ease */
-static void	init_tmp_array(int *tmp_arr, int argc)
+void	init_tmp_array(int *tmp_arr, int argc)
 {
 	int	x;
 
@@ -101,10 +101,9 @@ void	radix_sort(int *num, int argc)
 		// /*debug*/ft_printf("\n");
 		while (count[PB] > 0)
 		{
-			push_a(num, tmp_arr, argc, count);
+			push_a(num, tmp_arr, argc, count[PB]);
 			// ft_printf("%d pa, num[i] %d, x %d, %d %d\n", i, num[i], x, (num[i] >> x), ((num[i] >> x) & 1));
 			// ft_printf("pa\n");
-			i++;
 			count[PB]--;
 		}
 		// /*debug*/ft_printf("---\n\n");

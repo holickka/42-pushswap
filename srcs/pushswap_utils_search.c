@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:46:34 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/03 18:18:09 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/04 10:50:00 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	find_n_replace(int *search, int *res, int size)
 	int	k;
 
 	j = 0;
-	while (j < size) //6
+	while (j < size)
 	{
 		k = 0;
 		while (k < size)

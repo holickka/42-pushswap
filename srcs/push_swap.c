@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 07:40:45 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 08:50:45 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/04 18:06:53 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_duplicates(char **argv, int argc, t_vars *vars)
 			{
 				if (vars->b_split == 1)
 					free_ptr(vars->argv);
-				return(ft_perror_fd("Error", 2, 0));
+				return(ft_perror_fd("Error\n", 2, 0));
 			}
 			i++;
 		}
@@ -79,20 +79,20 @@ int	check_str(char *argv)
 
 	x = 0;
 	if (!check_num_limit(argv))
-		return (ft_perror_fd("Error minmax", 2, 0));
+		return (ft_perror_fd("Error\n", 2, 0));
 	if (argv[x] == '\f' || argv[x] == '	')
-		return (ft_perror_fd("Error tab", 2, 0));
+		return (ft_perror_fd("Error\n", 2, 0));
 	if ((argv[x] == '+' && argv[x + 1] == '+') \
 		|| (argv[x] == '-' && argv[x + 1] == '-'))
-		return (ft_perror_fd("Error sign", 2, 0));
+		return (ft_perror_fd("Error\n", 2, 0));
 	if (argv[x] == '+' || argv[x] == '-')
 		x++;
 	if (!argv[x])
-		return (ft_perror_fd("Error empty", 2, 0));
+		return (ft_perror_fd("Error\n", 2, 0));
 	while (argv[x])
 	{
 		if (!ft_strchr("0123456789", argv[x++]))
-			return (ft_perror_fd("Error num", 2, 0));
+			return (ft_perror_fd("Error\n", 2, 0));
 	}
 	return (1);
 }
@@ -192,7 +192,12 @@ void	restructure_array(t_vars *vars, char **tmp)
 	}
 }
 
-/* uses malloc */
+/*
+ * Applies split when argc <= 2
+ * if split result <= 1 string, return (0)
+ * else return (1)
+ * uses malloc
+ */
 int	split_argv(char **argv, t_vars *vars)
 {
 	int		count;
@@ -220,7 +225,7 @@ int	split_argv(char **argv, t_vars *vars)
 	if (count <= 1)
 	{
 		free_ptr(tmp);
-		return (ft_perror_fd("Error", 2, 0));
+		return (0);
 	}
 	vars->b_split = 1;
 	vars->argc = count + 1;
@@ -238,7 +243,7 @@ int	main(int argc, char **argv) // 31 - 5 -4
 	// /*debug*/printf("argc_enter=%d\n", argc);
 	if (argc == 1)
 		return (0);
-	else if (argc < 3)
+	else if (argc == 2)
 	{
 		if (split_argv(argv, &vars))
 		{
@@ -247,8 +252,11 @@ int	main(int argc, char **argv) // 31 - 5 -4
 			// /*debug*/printf("argc_new=%d\n", argc);
 		}
 		else
+		{
+			check_str(argv[1]);
 			return (0);
-	} //15
+		}
+	}
 	// /*debug*/ printf("-----------\nargc=%d\n", argc);
 	// /*-------debug------*/
 	// int x = 0;
@@ -286,7 +294,7 @@ int	main(int argc, char **argv) // 31 - 5 -4
 	merge_sort(vars.sorted_num, (argc - 1));
 
 	// /*------------debug------------*/
-	// x = 0;
+	// int x = 0;
 	// printf("array=");
 	// while (x < argc - 1)
 	// 	/*debug*/ printf("%d ", vars.num[x++]);
@@ -308,10 +316,12 @@ int	main(int argc, char **argv) // 31 - 5 -4
 	// printf("\n");
 	// /*----------debug end-----------*/
 
-	if (argc - 1 > 10)
+	if (argc - 1 > 5)
 		radix_sort(vars.num, (argc - 2));
+	if (argc - 1 <= 3)
+		simple_sort_3(vars.num, (argc - 2));
 	else
-		simple_sort(vars.num, (argc - 2));
+		simple_sort_5(vars.num, (argc - 2));
 
 	// /*------------debug------------*/
 	// x = 0;
@@ -322,4 +332,6 @@ int	main(int argc, char **argv) // 31 - 5 -4
 	// /*----------debug end-----------*/
 	// // /*remember to free initialized malloc pointers*/
 	free_all(&vars);
+	fflush(stderr);
+	return (0);
 }
