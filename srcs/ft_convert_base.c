@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 22:10:24 by hsim              #+#    #+#             */
-/*   Updated: 2024/12/31 22:13:55 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/03 08:00:39 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int	ft_convert_base(char *base_return, char *str)
 
 	res = 0;
 	if (!check_input_limit(str))
-		return (ft_perror(\
-				"Error! exceeded max num limit in ft_convert_base", -1));
+		return (ft_perror_fd(\
+				"Error! exceeded max num limit in ft_convert_base", 2, -1));
 	ft_itobase(base_return, ft_atoi(str), &res);
 	return (res);
 }

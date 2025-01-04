@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 21:04:08 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/02 22:18:29 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/03 13:34:33 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,112 +39,6 @@ void	*shift_array(int *dest, int *src, int len)
 	return (dest);
 }
 
-/*
- * argc = initial argc - 2
- * argc need to minus counts of push_b
- * if there are no push_b involve, count_pb can be 0
- */
-void	rotate_a(int *num, int argc, int count_pb)
-{
-	int	i;
-	int	tmp;
-
-	/*-------debug-------*/
-	int x = 0;
-	printf("before ra=");
-	while (x <= argc)
-		printf("%d ", num[x++]);
-	/*-------debug end-------*/
-
-	i = 0;
-	tmp = num[0];
-	shift_array(&num[0], &num[1], argc - count_pb);
-	num[argc - count_pb] = tmp;
-	ft_printf("ra\n");
-
-	/*-------debug-------*/
-	printf("\nafter ra= ");
-	x = 0;
-	while (x <= argc)
-		printf("%d ", num[x++]);
-	printf("\n");
-	/*-------debug end-------*/
-}
-
-/*
- * argc = initial argc - 2
- */
-void	push_b(int *num, int *tmp, int argc, int count_pb)
-{
-	// /*debug*/
-	// printf("\nbefore pb= ");
-	// int x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// /*debug end*/
-
-	shift_array(&tmp[1], &tmp[0], count_pb); //append tmp
-	tmp[0] = num[0]; // copy over
-	shift_array(&num[0], &num[1], argc - count_pb + 1); //update array
-	num[argc - count_pb + 1] = -1; //replace empty array with -1
-	ft_printf("pb\n");
-
-	// /*debug*/
-	// printf("num[argc] %d", num[argc]);
-	// printf("\nafter pb= ");
-	// x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// x = 0;
-	// printf("\npb_arr= ");
-	// while (x <= argc)
-	// 	printf("%d ", tmp[x++]);
-	// printf("\n");
-	// /*debug end*/
-}
-
-/* pushes array from *tmp to *num */
-void	push_a(int *num, int *tmp, int argc, int *count)
-{
-	// /*debug*/
-	// printf("\nbefore pa= ");
-	// int x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// printf("\ncount_ra %d | pb %d | argc %d", count[RA], count[PB], argc);
-	// /*debug end*/
-
-	shift_array(&num[1], &num[0], argc - count[PB] + 1); //shirt num array down, might be RA
-	num[0] = tmp[0];
-	shift_array(&tmp[0], &tmp[1], count[PB]); //shift tmp array up
-	tmp[count[PB]] = -1; //replace empty array with -1
-	ft_printf("pa\n");
-
-	// count[PB] -= 1;
-
-	// /*debug*/
-	// printf("\nafter pa= ");
-	// x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// x = 0;
-	// printf("\npb_arr= ");
-	// while (x <= argc)
-	// 	printf("%d ", tmp[x++]);
-	// printf("\n");
-	// /*debug end*/
-}
-
-void	swap_a(int *num)
-{
-	int	tmp;
-
-	tmp = num[0];
-	num[0] = num[1];
-	num[1] = tmp;
-	ft_printf("sa\n");
-}
-
 /* initializes all tmp_array values to -1 for debug ease */
 static void	init_tmp_array(int *tmp_arr, int argc)
 {
@@ -154,6 +48,11 @@ static void	init_tmp_array(int *tmp_arr, int argc)
 	while (x < argc)
 		tmp_arr[x++] = -1;
 }
+
+// void	execute_sort(int max_bit_size, int *count, int argc)
+// {
+
+// }
 
 /*
  * Converts number into binary, apply bitwise operation/comparison,
@@ -208,7 +107,7 @@ void	radix_sort(int *num, int argc)
 			i++;
 			count[PB]--;
 		}
-		/*debug*/ft_printf("---\n\n");
+		// /*debug*/ft_printf("---\n\n");
 		// printf("---\n\n");
 		x++;
 	}

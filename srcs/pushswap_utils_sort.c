@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 21:36:01 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/02 12:25:03 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/03 18:44:10 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	copy_array(int *dest, int *src, int n)
 		dest[n] = src[n];
 }
 
-void	free_ptr(int *ptr[2], int n)
+static void	free_mergesort_ptr(int *ptr[2], int n)
 {
 	while (n > 0)
 		free(ptr[--n]);
@@ -102,5 +102,5 @@ void	merge_sort(int *array, int argc)
 	/*merge_final*/
 	merge_final(arr, array, argc);
 	// /*debug*/printf("end\n\n");
-	free_ptr(arr, 2);
+	free_mergesort_ptr(arr, 2);
 }
