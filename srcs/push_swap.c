@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 07:40:45 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 18:06:53 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/04 21:00:49 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,13 +150,13 @@ void	free_ptr(char **ptr)
 	free(ptr);
 }
 
-void	free_all(t_vars *vars)
+int	free_all(t_vars *vars)
 {
 	int	i;
 
 	i = 0;
 	if (!vars)
-		return ;
+		return (-1);
 	free(vars->num);
 	free(vars->sorted_num);
 	if (vars->b_split == 1)
@@ -164,6 +164,7 @@ void	free_all(t_vars *vars)
 		free_ptr(vars->argv);
 		vars->b_split = 0;
 	}
+	return (0);
 }
 
 /*
@@ -234,16 +235,102 @@ int	split_argv(char **argv, t_vars *vars)
 	return (1);
 }
 
+int	process_numbers(t_vars *vars, char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (argv[i] != NULL) //separate
+	{
+		if (!check_str(argv[i]))
+		{
+			free_all(vars);
+			return (0);
+		}
+		vars->num[i - 1] = ft_atol(argv[i]);
+		vars->sorted_num[i - 1] = vars->num[i - 1];
+		i++;
+	}
+	return (1);
+}
+
+int check_argc_2(t_vars *vars, char ***argv, int *argc)
+{
+	// (void)	vars;
+
+	// /*debug*/
+	// int i = 0;
+	// while ((*argv)[i])
+	// /*debug*/printf("Check %s\n", (*argv)[i++]);
+	// /*debug end*/
+	if (split_argv(*argv, vars))
+	{
+		*argv = vars->argv;
+		*argc = vars->argc;
+		return (1);
+	}
+	else
+	{
+		check_str((*argv)[1]);
+		return (0);
+	}
+}
+
+int	start_pushswap(t_vars *vars, char **argv, int argc)
+{
+	if (!check_duplicates(argv, argc, vars))
+		return (0);
+	if (!initialize_data_container(vars, argc))
+		return (0);
+	if (!process_numbers(vars, argv))
+		return (0);
+	if (if_sorted(vars->num, argc - 2))
+		return (free_all(vars));
+	merge_sort(vars->sorted_num, (argc - 1));
+
+	// // /*------------debug------------*/
+	// // int x = 0;
+	// // printf("array=");
+	// // while (x < argc - 1)
+	// // 	/*debug*/ printf("%d ", vars.num[x++]);
+	// // printf("\n");
+	// // x = 0;
+	// // printf("sorted=");
+	// // while (x < argc - 1)
+	// // 	/*debug*/ printf("%d ", vars.sorted_num[x++]);
+	// // printf("\n");
+	// // /*------------debug end------------*/
+
+	find_n_replace(vars->sorted_num, vars->num, argc - 1);
+
+	// // /*------------debug------------*/
+	// // x = 0;
+	// // printf("new_index=");
+	// // while (x < argc - 1)
+	// // 	/*debug*/ printf("%d ", vars.num[x++]);
+	// // printf("\n");
+	// // /*----------debug end-----------*/
+
+	if (argc - 1 > 5)
+		radix_sort(vars->num, (argc - 2));
+	if (argc - 1 <= 3)
+		simple_sort_3(vars->num, (argc - 2));
+	else
+		simple_sort_5(vars->num, (argc - 2));
+	return (1);
+}
 
 int	main(int argc, char **argv) // 31 - 5 -4 
 {
-	int		i;
 	t_vars	vars;
 
 	// /*debug*/printf("argc_enter=%d\n", argc);
+	// /*debug*/printf("Check %s\n", argv[1]);
+
 	if (argc == 1)
 		return (0);
-	else if (argc == 2)
+	else if (argc == 2)// && !check_argc_2(&vars, &argv, &argc))//separate
+		// return (0);
 	{
 		if (split_argv(argv, &vars))
 		{
@@ -257,6 +344,7 @@ int	main(int argc, char **argv) // 31 - 5 -4
 			return (0);
 		}
 	}
+
 	// /*debug*/ printf("-----------\nargc=%d\n", argc);
 	// /*-------debug------*/
 	// int x = 0;
@@ -268,60 +356,48 @@ int	main(int argc, char **argv) // 31 - 5 -4
 	// }
 	// printf("\n");
 	// /*-------debug end------*/
-	/*checknum*/
-	if (!check_duplicates(argv, argc, &vars))
-		return (0);
-	if (!initialize_data_container(&vars, argc))
-		return (0);
-	// // // /*copy num*/
-	i = 1;
-	while (argv[i] != NULL) //separate
-	{
-		if (!check_str(argv[i]))
-		{
-			free_all(&vars);
-			return (0);
-		}
-		vars.num[i - 1] = ft_atol(argv[i]);
-		vars.sorted_num[i - 1] = vars.num[i - 1];
-		i++;
-	}
-	if (if_sorted(vars.num, argc - 2)) //separate
-	{
-		free_all(&vars);
-		return (0);
-	}
-	merge_sort(vars.sorted_num, (argc - 1));
+	// // /*checknum*/
 
-	// /*------------debug------------*/
-	// int x = 0;
-	// printf("array=");
-	// while (x < argc - 1)
-	// 	/*debug*/ printf("%d ", vars.num[x++]);
-	// printf("\n");
-	// x = 0;
-	// printf("sorted=");
-	// while (x < argc - 1)
-	// 	/*debug*/ printf("%d ", vars.sorted_num[x++]);
-	// printf("\n");
-	// /*------------debug end------------*/
 
-	find_n_replace(vars.sorted_num, vars.num, argc - 1);
+	// if (!check_duplicates(argv, argc, &vars))
+	// 	return (0);
+	// if (!initialize_data_container(&vars, argc))
+	// 	return (0);
+	// if (!process_numbers(&vars, argv))
+	// 	return (0);
+	// if (if_sorted(vars.num, argc - 2)) //separate
+	// 	return (free_all(&vars));
+	// merge_sort(vars.sorted_num, (argc - 1));
 
-	// /*------------debug------------*/
-	// x = 0;
-	// printf("new_index=");
-	// while (x < argc - 1)
-	// 	/*debug*/ printf("%d ", vars.num[x++]);
-	// printf("\n");
-	// /*----------debug end-----------*/
+	// // /*------------debug------------*/
+	// // int x = 0;
+	// // printf("array=");
+	// // while (x < argc - 1)
+	// // 	/*debug*/ printf("%d ", vars.num[x++]);
+	// // printf("\n");
+	// // x = 0;
+	// // printf("sorted=");
+	// // while (x < argc - 1)
+	// // 	/*debug*/ printf("%d ", vars.sorted_num[x++]);
+	// // printf("\n");
+	// // /*------------debug end------------*/
 
-	if (argc - 1 > 5)
-		radix_sort(vars.num, (argc - 2));
-	if (argc - 1 <= 3)
-		simple_sort_3(vars.num, (argc - 2));
-	else
-		simple_sort_5(vars.num, (argc - 2));
+	// find_n_replace(vars.sorted_num, vars.num, argc - 1);
+
+	// // /*------------debug------------*/
+	// // x = 0;
+	// // printf("new_index=");
+	// // while (x < argc - 1)
+	// // 	/*debug*/ printf("%d ", vars.num[x++]);
+	// // printf("\n");
+	// // /*----------debug end-----------*/
+
+	// if (argc - 1 > 5)
+	// 	radix_sort(vars.num, (argc - 2));
+	// if (argc - 1 <= 3)
+	// 	simple_sort_3(vars.num, (argc - 2));
+	// else
+	// 	simple_sort_5(vars.num, (argc - 2));
 
 	// /*------------debug------------*/
 	// x = 0;
@@ -330,8 +406,8 @@ int	main(int argc, char **argv) // 31 - 5 -4
 	// 	/*debug*/ printf("%d ", vars.num[x++]);
 	// printf("\n");
 	// /*----------debug end-----------*/
-	// // /*remember to free initialized malloc pointers*/
-	free_all(&vars);
-	fflush(stderr);
-	return (0);
+	
+	if (!start_pushswap(&vars, argv, argc))
+		return (0);
+	return (free_all(&vars));
 }
