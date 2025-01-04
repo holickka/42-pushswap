@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 07:44:12 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 22:13:07 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/04 22:21:18 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@
 enum e_sort
 {
 	L = 0,
-	R = 1,
-	RA = 0,
-	PB = 1
+	R = 1
 };
 
 typedef struct s_vars
@@ -57,7 +55,6 @@ void	*shift_array(int *dest, int *src, int len);
 void	find_n_replace(int *search, int *res, int size);
 void	init_tmp_array(int *tmp_arr, int argc);
 int		initialize_data_container(t_vars *vars, int argc);
-
 
 void	free_ptr(char **ptr);
 int		free_all(t_vars *vars);

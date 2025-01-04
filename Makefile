@@ -20,7 +20,6 @@ INCS = -I$(INC_PATH) -I$(LIBFT_PATH) -I$(PRINTF_PATH)
 FLAGS = -Wall -Wextra -Werror $(FSAN) $(INCS)
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 SRCS_FILES =	push_swap.c \
-				ft_convert_base.c \
 				pushswap_utils.c \
 				pushswap_utils_mergesort.c \
 				pushswap_utils_radixsort.c \
