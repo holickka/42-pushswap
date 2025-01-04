@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pushswap_utils_sort.c                              :+:      :+:    :+:   */
+/*   pushswap_utils_mergesort.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 21:36:01 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/03 18:44:10 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/04 22:18:07 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	free_mergesort_ptr(int *ptr[2], int n)
 		free(ptr[--n]);
 }
 
-/* 21 lines ok! */
+/* 22 lines ok! */
 /*
  * Child function in merge_sort
  * *arr[2] = double pointer to left & right array
@@ -58,8 +58,8 @@ static void	merge_final(int *arr[2], int *array, int argc)
 	while (r < len[R])
 		array[i++] = arr[R][r++];
 
-	i = 0;
 	// /*debug*/
+	// i = 0;
 	// printf("-----final_array-----\n");
 	// while (i < argc)
 	// 	printf("%d ", array[i++]);
@@ -96,11 +96,9 @@ void	merge_sort(int *array, int argc)
 	// 	printf("arr_right=%d\n", arr[R][x++]);
 	// printf("\n");
 	// /*debug end*/
-	/*call function again*/
+
 	merge_sort(arr[L], mid);
 	merge_sort(arr[R], argc - mid);
-	/*merge_final*/
 	merge_final(arr, array, argc);
-	// /*debug*/printf("end\n\n");
 	free_mergesort_ptr(arr, 2);
 }

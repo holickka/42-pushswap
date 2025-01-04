@@ -21,10 +21,12 @@ FLAGS = -Wall -Wextra -Werror $(FSAN) $(INCS)
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 SRCS_FILES =	push_swap.c \
 				ft_convert_base.c \
-				pushswap_utils_sort.c \
+				pushswap_utils.c \
+				pushswap_utils_mergesort.c \
 				pushswap_utils_radixsort.c \
 				pushswap_utils_simplesort.c \
-				pushswap_utils_search.c \
+				pushswap_utils_error.c \
+				pushswap_utils_free.c \
 				pushswap_utils_cmd.c
 #main-test-mergesort.c push_swap.c
 OBJS = $(SRCS:%.c=%.o)

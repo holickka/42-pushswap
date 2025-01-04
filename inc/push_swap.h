@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 07:44:12 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 16:47:18 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/04 22:13:07 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,18 @@ void	push_b(int *num, int *tmp, int argc, int count_pb);
 void	rotate_a(int *num, int argc, int count_pb);
 void	rev_rotate_a(int *num, int argc, int count_pb);
 
+int		check_str(char *argv);
+int		check_num_limit(char *argv);
+int		check_duplicates(char **argv, int argc, t_vars *vars);
+
 int		if_sorted(int *num, int argc);
 void	*shift_array(int *dest, int *src, int len);
 void	find_n_replace(int *search, int *res, int size);
 void	init_tmp_array(int *tmp_arr, int argc);
+int		initialize_data_container(t_vars *vars, int argc);
+
 
 void	free_ptr(char **ptr);
+int		free_all(t_vars *vars);
 
 #endif
