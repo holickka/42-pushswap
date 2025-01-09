@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 21:36:01 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 22:18:07 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/09 15:45:47 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static void	merge_final(int *arr[2], int *array, int argc)
 	r = 0;
 	len[L] = (argc / 2);
 	len[R] = (argc - len[L]);
-	// /*debug*/ printf("len_LR=%d %d, argc=%d\n", len[L], len[R], argc);
-
 	while (l < len[L] && r < len[R] && i < argc)
 	{
 		if (arr[L][l] < arr[R][r])
@@ -51,20 +49,11 @@ static void	merge_final(int *arr[2], int *array, int argc)
 		else if (arr[R][r] < arr[L][l])
 			array[i] = arr[R][r++];
 		i++;
-		// /*debug*/ printf("array=%d\n", array[i++]);
 	}
 	while (l < len[L])
 		array[i++] = arr[L][l++];
 	while (r < len[R])
 		array[i++] = arr[R][r++];
-
-	// /*debug*/
-	// i = 0;
-	// printf("-----final_array-----\n");
-	// while (i < argc)
-	// 	printf("%d ", array[i++]);
-	// printf("\n");
-	// /*debug end*/
 }
 
 /* 14 lines ok! */
@@ -83,20 +72,8 @@ void	merge_sort(int *array, int argc)
 	mid = (argc / 2);
 	arr[L] = (int *)malloc(sizeof(int) * mid);
 	arr[R] = (int *)malloc(sizeof(int) * (argc - mid));
-	// /*debug*/ printf("mid=%d, len=%d\n", mid, argc);
 	copy_array(arr[L], array, mid);
 	copy_array(arr[R], &array[mid], (argc - mid));
-
-	// /*debug*/
-	// int x = 0;
-	// while (x < mid)
-	// 	printf("arr_left=%d\n", arr[L][x++]);
-	// x = 0;
-	// while (x < (argc - mid))
-	// 	printf("arr_right=%d\n", arr[R][x++]);
-	// printf("\n");
-	// /*debug end*/
-
 	merge_sort(arr[L], mid);
 	merge_sort(arr[R], argc - mid);
 	merge_final(arr, array, argc);

@@ -27,7 +27,7 @@ SRCS_FILES =	push_swap.c \
 				pushswap_utils_error.c \
 				pushswap_utils_free.c \
 				pushswap_utils_cmd.c
-#main-test-mergesort.c push_swap.c
+#main-test-mergesort.c
 OBJS = $(SRCS:%.c=%.o)
 
 # ---------lib making & remove--------- #

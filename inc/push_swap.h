@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 07:44:12 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 22:21:18 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/09 15:56:59 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 # include "libft.h"
 # include "libftprintf.h"
 # include <stdbool.h>
-
-/*remove this during eval*/
-# include <stdio.h>
 
 enum e_sort
 {
@@ -40,7 +37,7 @@ void	radix_sort(int *num, int argc);
 void	simple_sort_3(int *num, int argc);
 void	simple_sort_5(int *num, int argc);
 
-void	swap_a(int *num, int argc);
+void	swap_a(int *num);
 void	push_a(int *num, int *tmp, int argc, int count_pb);
 void	push_b(int *num, int *tmp, int argc, int count_pb);
 void	rotate_a(int *num, int argc, int count_pb);

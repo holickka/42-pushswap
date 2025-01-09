@@ -6,12 +6,11 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 21:04:08 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 21:52:08 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/09 15:45:59 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 void	*shift_array(int *dest, int *src, int len)
 {

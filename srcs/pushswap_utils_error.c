@@ -6,12 +6,11 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:56:13 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 22:09:44 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/09 15:45:11 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 int	check_duplicates(char **argv, int argc, t_vars *vars)
 {

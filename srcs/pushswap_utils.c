@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pushswap_utils_search.c                            :+:      :+:    :+:   */
+/*   pushswap_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:46:34 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 22:14:09 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/09 15:46:22 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	initialize_data_container(t_vars *vars, int argc)
 {
 	vars->num = (int *)malloc(sizeof(int) * (argc - 1));
 	vars->sorted_num = (int *)malloc(sizeof(int) * (argc - 1));
-
 	if (!vars->num || !vars->sorted_num)
 	{
 		free(vars->num);

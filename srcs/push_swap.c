@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 07:40:45 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 22:16:11 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/09 14:29:13 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,6 @@ int	split_argv(char **argv, t_vars *vars)
 {
 	int		count;
 	char	**tmp;
-
-	// /*-------debug------*/
-	// int x = 0;
-	// printf("enter=");
-	// while (x < argc)
-	// {
-	// /*debug*/ printf("%d:%s ", x, argv[x]);
-	// 	x++;
-	// }
-	// printf("\n");
-	// /*-------debug end------*/
 
 	count = 0;
 	tmp = ft_split(argv[1], ' ');
@@ -106,30 +95,7 @@ int	start_pushswap(t_vars *vars, char **argv, int argc)
 	if (if_sorted(vars->num, argc - 2))
 		return (free_all(vars));
 	merge_sort(vars->sorted_num, (argc - 1));
-
-	// // /*------------debug------------*/
-	// // int x = 0;
-	// // printf("array=");
-	// // while (x < argc - 1)
-	// // 	/*debug*/ printf("%d ", vars.num[x++]);
-	// // printf("\n");
-	// // x = 0;
-	// // printf("sorted=");
-	// // while (x < argc - 1)
-	// // 	/*debug*/ printf("%d ", vars.sorted_num[x++]);
-	// // printf("\n");
-	// // /*------------debug end------------*/
-
 	find_n_replace(vars->sorted_num, vars->num, argc - 1);
-
-	// // /*------------debug------------*/
-	// // x = 0;
-	// // printf("new_index=");
-	// // while (x < argc - 1)
-	// // 	/*debug*/ printf("%d ", vars.num[x++]);
-	// // printf("\n");
-	// // /*----------debug end-----------*/
-
 	if (argc - 1 > 5)
 		radix_sort(vars->num, (argc - 2));
 	if (argc - 1 <= 3)

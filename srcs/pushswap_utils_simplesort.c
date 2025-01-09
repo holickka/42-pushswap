@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 20:09:29 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 21:24:31 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/09 14:32:20 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,14 +129,14 @@ void	simple_sort_3(int *num, int argc)
 		else if (min_index == 1)
 		{
 			if (argc > 1 && (num[0] < num[2]))
-				swap_a(num, argc);
+				swap_a(num);
 			else
 				rotate_a(num, argc, 0);
 		}
 		else if (min_index == 2)
 		{
 			if (num[0] > num[1])
-				swap_a(num, argc);
+				swap_a(num);
 			else
 				rotate_a(num, argc, 0);
 		}

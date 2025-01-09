@@ -6,7 +6,7 @@
 /*   By: hsim <hsim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:32:30 by hsim              #+#    #+#             */
-/*   Updated: 2025/01/04 17:17:32 by hsim             ###   ########.fr       */
+/*   Updated: 2025/01/09 14:30:59 by hsim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,11 @@ void	rotate_a(int *num, int argc, int count_pb)
 	int	i;
 	int	tmp;
 
-	// /*-------debug-------*/
-	// int x = 0;
-	// printf("before ra=");
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// /*-------debug end-------*/
-
 	i = 0;
 	tmp = num[0];
 	shift_array(&num[0], &num[1], argc - count_pb);
 	num[argc - count_pb] = tmp;
 	ft_printf("ra\n");
-
-	// /*-------debug-------*/
-	// printf("\nafter ra= ");
-	// x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// printf("\n");
-	// /*-------debug end-------*/
 }
 
 /*
@@ -54,26 +39,11 @@ void	rev_rotate_a(int *num, int argc, int count_pb)
 	int	i;
 	int	tmp;
 
-	// /*-------debug-------*/
-	// int x = 0;
-	// printf("before ra=");
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// /*-------debug end-------*/
-
 	i = 0;
 	tmp = num[argc - count_pb];
 	shift_array(&num[1], &num[0], argc - count_pb);
 	num[0] = tmp;
 	ft_printf("rra\n");
-
-	// /*-------debug-------*/
-	// printf("\nafter ra= ");
-	// x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// printf("\n");
-	// /*-------debug end-------*/
 }
 
 /*
@@ -86,31 +56,11 @@ void	rev_rotate_a(int *num, int argc, int count_pb)
  */
 void	push_b(int *num, int *tmp, int argc, int count_pb)
 {
-	// /*debug*/
-	// printf("\nbefore pb= ");
-	// int x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// /*debug end*/
-
-	shift_array(&tmp[1], &tmp[0], count_pb); //append tmp down by 1 to makespace
-	tmp[0] = num[0]; //copy over
-	shift_array(&num[0], &num[1], argc - count_pb + 1); //update array
-	num[argc - count_pb + 1] = -1; //replace empty array with -1
+	shift_array(&tmp[1], &tmp[0], count_pb);
+	tmp[0] = num[0];
+	shift_array(&num[0], &num[1], argc - count_pb + 1);
+	num[argc - count_pb + 1] = -1;
 	ft_printf("pb\n");
-
-	// /*debug*/
-	// printf("num[argc] %d", num[argc]);
-	// printf("\nafter pb= ");
-	// x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// x = 0;
-	// printf("\npb_arr= ");
-	// while (x <= argc)
-	// 	printf("%d ", tmp[x++]);
-	// printf("\n");
-	// /*debug end*/
 }
 
 /*
@@ -119,58 +69,19 @@ void	push_b(int *num, int *tmp, int argc, int count_pb)
  */
 void	push_a(int *num, int *tmp, int argc, int count_pb)
 {
-	// /*debug*/
-	// printf("\nbefore pa= ");
-	// int x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// printf("\ncount_ra %d | pb %d | argc %d", count[RA], count[PB], argc);
-	// /*debug end*/
-	// /*debug*/printf("count_pb in pa=%d\n", count_pb);
-	shift_array(&num[1], &num[0], argc - count_pb + 1); //shirt num array down, might be RA
+	shift_array(&num[1], &num[0], argc - count_pb + 1);
 	num[0] = tmp[0];
-	shift_array(&tmp[0], &tmp[1], count_pb); //shift tmp array up
-	tmp[count_pb] = -1; //replace empty array with -1
+	shift_array(&tmp[0], &tmp[1], count_pb);
+	tmp[count_pb] = -1;
 	ft_printf("pa\n");
-
-	// count[PB] -= 1;
-
-	// /*debug*/
-	// printf("\nafter pa= ");
-	// x = 0;
-	// while (x <= argc)
-	// 	printf("%d ", num[x++]);
-	// x = 0;
-	// printf("\npb_arr= ");
-	// while (x <= argc)
-	// 	printf("%d ", tmp[x++]);
-	// printf("\n");
-	// /*debug end*/
 }
 
-void	swap_a(int *num, int argc)
+void	swap_a(int *num)
 {
-    (void)  argc;
 	int	tmp;
-
-	// /*-------debug------*/
-	// int x = 0;
-	// printf("before sa=");
-	// while (x <= argc)
-	// /*debug*/ printf("%d ", num[x++]);
-	// printf("\n");
-	// /*-------debug end------*/
 
 	tmp = num[0];
 	num[0] = num[1];
 	num[1] = tmp;
 	ft_printf("sa\n");
-
-	// /*-------debug------*/
-	// x = 0;
-	// printf("sa=");
-	// while (x <= argc)
-	// /*debug*/ printf("%d ", num[x++]);
-	// printf("\n");
-	// /*-------debug end------*/
 }
